@@ -1,0 +1,16 @@
+{
+  "name": "Shinya",
+  "age": "26",
+  "gender": "Male",
+  "skills": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    {
+      "PHP": [
+        "オブジェクト指向",
+        "JSON/API"
+      ]
+    }
+  ]
+}
