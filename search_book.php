@@ -3,8 +3,19 @@
 // formタグ、inputタグ
 // 文字列連結
 // if文で条件分岐（検索したときとしてないとき）
+// var_dump($_GET);
+// echo $_GET['title']; // 入力されたデータ
 
-$json = file_get_contents('https://www.googleapis.com/books/v1/volumes?q=鬼速PDCA');
+// $hoge = 'デザイン４原則';
+var_dump($_GET);
+if (!isset($_GET['title'])) {
+    $_GET['title'] = '鬼速PDCA';
+}
+// rawurlencode()関数を使ってスペースを%20に変換する
+$json = file_get_contents('https://www.googleapis.com/books/v1/volumes?q=' . rawurlencode($_GET['title'])); // 変数を利用
+
+// ?を使うパターンはDBを操作するときのみ
+
 $decode_data = json_decode($json, true);
 // 表示用の変数を３つ定義
 $title = $decode_data['items'][0]['volumeInfo']['title'];
@@ -18,8 +29,8 @@ $imageLink = $decode_data['items'][0]['volumeInfo']['imageLinks']['smallThumbnai
   <title></title>
 </head>
 <body>
-  <form method="" action="">
-    <input type="text" name="">
+  <form method="GET" action="">
+    <input type="text" name="title" value="<?php echo $_GET['title']; ?>">
     <input type="submit" value="検索">
   </form>
   <div>
